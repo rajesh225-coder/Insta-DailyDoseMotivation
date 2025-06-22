@@ -1,20 +1,15 @@
-name: Upload Random Instagram Reel
+name: Upload Random Instagram Reel & Facebook Video # Updated name for clarity
 
 on:
   schedule:
-    # Runs every day at 12:00 PM UTC (adjust cron for your desired time)
-    # Check cron schedule format: https://crontab.guru/
-    # For example, to run at 7:00 PM IST (which is 1:30 PM UTC): 30 13 * * *
-    # Current time is Sunday, June 22, 2025 at 7:56:59 PM IST
-    # 7:56 PM IST is 14:26 UTC on same day
-    # So for 7:00 PM IST, it would be 13:30 UTC
-    - cron: '30 13 * * *' # Example: Runs daily at 1:30 PM UTC (7:00 PM IST)
+    # Runs every day at 1:30 PM UTC (7:00 PM IST) - adjust cron for your desired time
+    - cron: '30 13 * * *'
   
   workflow_dispatch:
     # Allows you to manually trigger the workflow from the GitHub Actions tab
 
 jobs:
-  upload-reel:
+  upload-media: # Renamed job for clarity
     runs-on: ubuntu-latest
 
     steps:
@@ -31,13 +26,19 @@ jobs:
         python -m pip install --upgrade pip
         pip install cloudinary requests
 
-    - name: Run Instagram Uploader Script
+    - name: Run Uploader Script
       env:
-        # --- Add your GitHub Secrets here ---
+        # --- Cloudinary Secrets ---
         CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
         CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
         CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
+        
+        # --- Instagram Secrets (Instagram Business Account ID and its Page Access Token) ---
         INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
-        INSTAGRAM_PAGE_ID: ${{ secrets.INSTAGRAM_PAGE_ID }}
+        INSTAGRAM_PAGE_ID: ${{ secrets.INSTAGRAM_PAGE_ID }} 
+
+        # --- FIX: ADDED FACEBOOK SECRETS HERE ---
+        FACEBOOK_PAGE_ACCESS_TOKEN: ${{ secrets.FACEBOOK_PAGE_ACCESS_TOKEN }}
+        FACEBOOK_PAGE_ID: ${{ secrets.FACEBOOK_PAGE_ID }} 
       run: |
         python upload_instagram_reel.py # Make sure this matches your Python file name
