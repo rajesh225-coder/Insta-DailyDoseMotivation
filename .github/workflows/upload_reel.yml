@@ -1,0 +1,43 @@
+name: Upload Random Instagram Reel
+
+on:
+  schedule:
+    # Runs every day at 12:00 PM UTC (adjust cron for your desired time)
+    # Check cron schedule format: https://crontab.guru/
+    # For example, to run at 7:00 PM IST (which is 1:30 PM UTC): 30 13 * * *
+    # Current time is Sunday, June 22, 2025 at 7:56:59 PM IST
+    # 7:56 PM IST is 14:26 UTC on same day
+    # So for 7:00 PM IST, it would be 13:30 UTC
+    - cron: '30 13 * * *' # Example: Runs daily at 1:30 PM UTC (7:00 PM IST)
+  
+  workflow_dispatch:
+    # Allows you to manually trigger the workflow from the GitHub Actions tab
+
+jobs:
+  upload-reel:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x' # Specify your desired Python version, e.g., '3.9' or '3.10'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install cloudinary requests
+
+    - name: Run Instagram Uploader Script
+      env:
+        # --- Add your GitHub Secrets here ---
+        CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
+        CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
+        CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
+        INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+        INSTAGRAM_PAGE_ID: ${{ secrets.INSTAGRAM_PAGE_ID }}
+      run: |
+        python upload_instagram_reel.py # Make sure this matches your Python file name
