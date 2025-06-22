@@ -205,7 +205,7 @@ def main():
         videos = search_results.get('resources', [])
         
         if not videos:
-            print("No un-uploaded videos found in Cloudinary 'Quotes_Videos' folder. Exiting.")
+            print("No un-uploaded videos found in Cloudinary 'For_Youtube_Videos' folder. Exiting.")
             return
 
         random_video = random.choice(videos)
