@@ -143,7 +143,7 @@ def upload_video_to_instagram(video_url, caption, thumbnail_url=None):
 
 
 def main():
-    video_folder_name = "Quotes_Videos"
+    video_folder_name = "For_Insta"
     thumbnail_folder_name = "thumbnail"
 
     # Fetch resources from Cloudinary
