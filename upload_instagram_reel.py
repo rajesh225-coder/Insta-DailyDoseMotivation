@@ -143,7 +143,7 @@ def upload_video_to_instagram(video_url, caption, thumbnail_url=None):
 
 
 def main():
-    video_folder_name = "6_sec"
+    video_folder_name = "DailyDose"
     thumbnail_folder_name = "thumbnail"
 
     # Fetch resources from Cloudinary
@@ -168,7 +168,7 @@ def main():
         print(f"Warning: No thumbnails found in '{thumbnail_folder_name}'. Video will be posted without a custom thumbnail.")
 
     # Customize Instagram caption for video
-    instagram_video_caption = f"Here's your daily dose of inspiration! ✨ #quotes #motivation #inspiration #dailyquotes #randomvideo #reels"
+    instagram_video_caption = f"✨ #quotes #couple #quotes #love #randomvideo #reels"
 
     # Upload video to Instagram
     instagram_video_success = upload_video_to_instagram(selected_video_url, instagram_video_caption, selected_thumbnail_url)
